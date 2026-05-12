@@ -1,0 +1,22 @@
+core:
+  version: 0.0.1
+  project_name: ln_gossip_benchmark
+
+wandb:
+  _target_: wandb.init
+  entity: null
+  project: ${core.project_name}
+  tags: 
+    - final
+  save_code: true
+  settings:
+    enable_system_metrics: true
+
+torch_device: null
+device: ${device:${torch_device}}
+
+defaults:
+  - hydra: default
+  - data: default
+  - model: mlp
+  - _self_

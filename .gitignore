@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.python-version
+.wandb_cache/
+wandb/
+outputs/
+multirun/
+checkpoints/
+baselines.json
+*.log
+.idea/
+.vscode/

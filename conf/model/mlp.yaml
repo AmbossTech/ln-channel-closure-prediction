@@ -1,0 +1,29 @@
+# MLP — paper headline MLP config.
+# Reuses GNNPredictor with `use_gnn_embeddings=false`, so the GNN message
+# passing is skipped entirely; only edge features, raw node features, and
+# time encodings are fed through a small MLP head.
+defaults:
+  - _base
+  - _training
+
+name: mlp
+
+hidden_dim: 128
+time_dim: 128
+mlp_hidden_dim: 128
+mlp_num_hidden_layers: 1
+use_node_history: true
+use_edge_features: true
+use_time_encoding: true
+use_gnn_embeddings: false
+
+predictor:
+  _target_: ln_gossip_benchmark.modules.GNNPredictor
+  hidden_dim: ${model.hidden_dim}
+  time_dim: ${model.time_dim}
+  mlp_hidden_dim: ${model.mlp_hidden_dim}
+  mlp_num_hidden_layers: ${model.mlp_num_hidden_layers}
+  use_node_history: ${model.use_node_history}
+  use_edge_features: ${model.use_edge_features}
+  use_time_encoding: ${model.use_time_encoding}
+  use_gnn_embeddings: ${model.use_gnn_embeddings}

@@ -1,0 +1,15 @@
+# Random baseline model
+# Strategies: uniform, majority, stratified
+defaults:
+  - _base
+
+name: random
+
+# Random predictions - no training, just for reference comparison
+num_epochs: 1
+strategy: uniform  # uniform, majority, stratified
+
+trainer:
+  _target_: ln_gossip_benchmark.trainers.RandomTrainer
+  _recursive_: false
+  strategy: ${model.strategy}

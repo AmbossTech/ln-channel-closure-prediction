@@ -1,0 +1,3 @@
+_target_: ln_gossip_benchmark.data.LightningGossipDataset
+name: tgbl-ln
+hf_repo_id: Amboss-Tech/ln-gossip

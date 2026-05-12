@@ -1,0 +1,42 @@
+# Base training configuration shared by learned models
+# This file is inherited by models that require training (not random baseline)
+
+# Node feature configuration
+# If true: counts + current_degree + 3 ratios (7 features)
+# If false: just counts (3 features)
+enrich_node_features: false
+
+# Training parameters
+num_epochs: 30
+
+# Class-imbalance loss tweaks. `null` disables. `5.0` keeps 5 OPEN samples
+# in the loss for every 1 closure sample.
+downsample_open_ratio: null
+
+# Feature-group ablation flags (used by the neural Trainer).
+ablation_disable_gnn: false
+ablation_disable_raw_node_features: false
+
+# Spectral encoding (Laplacian eigenvectors) — `0` disables.
+spectral_dim: 0
+spectral_recompute_every: 10
+
+trainer:
+  _target_: ln_gossip_benchmark.trainers.Trainer
+  _recursive_: false
+
+optim:
+  _target_: torch.optim.Adam
+  lr: 1e-4
+  weight_decay: 1e-5
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.LinearLR
+  start_factor: 0.01
+  total_iters: 1000
+
+criterion:
+  _target_: torch.nn.CrossEntropyLoss
+  weight:
+    _target_: torch.tensor
+    data: [1.0, 5.0, 5.0]  # 3-class: OPEN, FORCED, MUTUAL - weighted

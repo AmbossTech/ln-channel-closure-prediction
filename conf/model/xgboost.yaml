@@ -1,0 +1,17 @@
+# XGBoost baseline
+defaults:
+  - _base
+
+name: xgboost
+
+# Just need num_epochs so the temporal pipeline replays training data
+num_epochs: 1
+
+trainer:
+  _target_: ln_gossip_benchmark.trainers.XGBoostTrainer
+  _recursive_: false
+  n_estimators: 500
+  max_depth: 6
+  learning_rate: 0.1
+  class_weights: [1.0, 5.0, 5.0]
+  enrich_node_features: true

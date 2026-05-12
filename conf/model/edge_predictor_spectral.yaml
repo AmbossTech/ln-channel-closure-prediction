@@ -1,0 +1,24 @@
+# Edge Predictor with Spectral Encodings
+# Uses: edge features + node features + time encoding + Laplacian eigenvectors
+defaults:
+  - _base
+  - _training
+
+name: edge_predictor_spectral
+
+hidden_dim: 128
+time_dim: 128
+spectral_dim: 16
+spectral_recompute_every: 10  # Recompute eigenvectors every N steps (amortize ~5s eigsh cost)
+use_edge_features: true
+use_time_encoding: true
+use_mlp: true
+
+predictor:
+  _target_: ln_gossip_benchmark.modules.MLPPredictor
+  hidden_dim: ${model.hidden_dim}
+  time_dim: ${model.time_dim}
+  use_edge_features: ${model.use_edge_features}
+  use_time_encoding: ${model.use_time_encoding}
+  use_mlp: ${model.use_mlp}
+  spectral_dim: ${model.spectral_dim}

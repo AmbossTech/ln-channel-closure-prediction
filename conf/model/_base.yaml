@@ -1,0 +1,23 @@
+# Base model configuration with shared parameters
+# This file is inherited by every concrete model config.
+
+seed: 0
+eval_every_steps: 600
+target_names: ["OPEN", "FORCED", "MUTUAL"]
+
+# Optional output paths. Override on the command line when you want them
+# (e.g. +model.save_predictions_path=results/x.npz). Keys are declared here
+# so the trainer can read them via direct attribute access.
+save_predictions_path: null
+save_model_path: null
+load_model_path: null
+
+neighbor_loader:
+  _target_: ln_gossip_benchmark.modules.neighbor_loader.OpenEdgesNeighborLoader
+  num_nodes: ???
+  device: ${device}
+
+ground_truth_oracle:
+  _target_: ln_gossip_benchmark.modules.lookahead.GroundTruthOracle
+  data_df: ???
+  time_window_days: 180

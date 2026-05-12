@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: "If you use this code or dataset, please cite the paper."
+title: "Predicting Channel Closures in the Lightning Network with Machine Learning"
+authors:
+  - family-names: Antonelli
+    given-names: Simone
+  - family-names: Davis
+    given-names: Vincent
+  - family-names: Rush
+    given-names: Harrison
+  - family-names: Potdevin
+    given-names: Anthony
+  - family-names: Shrader
+    given-names: Jesse
+  - family-names: Singh
+    given-names: Vikash
+  - family-names: Rossi
+    given-names: Emanuele
+year: 2026
+preferred-citation:
+  type: article
+  title: "Predicting Channel Closures in the Lightning Network with Machine Learning"
+  authors:
+    - family-names: Antonelli
+      given-names: Simone
+    - family-names: Davis
+      given-names: Vincent
+    - family-names: Rush
+      given-names: Harrison
+    - family-names: Potdevin
+      given-names: Anthony
+    - family-names: Shrader
+      given-names: Jesse
+    - family-names: Singh
+      given-names: Vikash
+    - family-names: Rossi
+      given-names: Emanuele
+  year: 2026
+  url: "https://arxiv.org/abs/2605.12759"
+  identifiers:
+    - type: other
+      value: "arXiv:2605.12759"
+      description: "arXiv preprint"

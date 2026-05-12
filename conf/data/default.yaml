@@ -1,0 +1,17 @@
+batch_size: 2000
+
+# Excludes first-day events (the initial gossip snapshot, which represents
+# accumulated state rather than a real day of activity).
+exclude_first_day: false
+# Initialises the temporal pipeline from first-day events without using them
+# for training/eval.
+warm_start: false
+
+loader:
+  _target_: torch_geometric.loader.TemporalDataLoader
+  data: ???
+  batch_size: ${data.batch_size}
+  neg_sampling_ratio: 0.0
+
+defaults:
+  - dataset: tgbl_ln

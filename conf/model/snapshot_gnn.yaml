@@ -1,0 +1,46 @@
+# Snapshot GNN baseline
+# Trains a GNN on a single end-of-training graph snapshot, then evaluates on
+# each test-time graph. Architecture is configurable: sage / gcn / transformer.
+# 'transformer' uses TransformerConv with edge_attr (matches the iterative TGN).
+defaults:
+  - _base
+
+name: snapshot_gnn
+
+# Iterations through training data only build state (no model training)
+num_epochs: 1
+
+# Architecture
+hidden_dim: 128
+num_layers: 2
+conv_type: transformer  # sage | gcn | transformer
+mlp_num_hidden_layers: 1
+mlp_hidden_dim: 128
+
+# Snapshot training
+snapshot_epochs: 200
+learning_rate: 1e-3
+weight_decay: 1e-5
+class_weights: [1.0, 5.0, 5.0]
+
+# Directional feature pairs to swap when reversing edges (matches temporal_gnn)
+directional_feature_pairs:
+  - [0, 1]
+  - [3, 4]
+  - [5, 6]
+  - [7, 8]
+  - [9, 10]
+
+trainer:
+  _target_: ln_gossip_benchmark.trainers.SnapshotGNNTrainer
+  _recursive_: false
+  hidden_dim: ${model.hidden_dim}
+  num_layers: ${model.num_layers}
+  conv_type: ${model.conv_type}
+  mlp_num_hidden_layers: ${model.mlp_num_hidden_layers}
+  mlp_hidden_dim: ${model.mlp_hidden_dim}
+  snapshot_epochs: ${model.snapshot_epochs}
+  learning_rate: ${model.learning_rate}
+  weight_decay: ${model.weight_decay}
+  class_weights: ${model.class_weights}
+  directional_feature_pairs: ${model.directional_feature_pairs}
